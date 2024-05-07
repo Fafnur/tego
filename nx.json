@@ -1,13 +1,83 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "parallel": 4,
+  "defaultBase": "develop",
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
-      "default"
+      "default",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.js",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/test-setup.[jt]s"
     ],
     "sharedGlobals": []
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview"
+      }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      },
+      "exclude": []
+    }
+  ],
+  "generators": {
+    "@nx/nest:app": {
+      "projectNameAndRootFormat": "as-provided",
+      "e2eTestRunner": "none",
+      "linter": "eslint"
+    },
+    "@nx/nest:library": {
+      "projectNameAndRootFormat": "as-provided",
+      "directory": "apps",
+      "linter": "eslint"
+    },
+    "@nx/angular:application": {
+      "projectNameAndRootFormat": "as-provided",
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "none",
+      "standalone": true,
+      "changeDetection": "OnPush"
+    },
+    "@nx/angular:library": {
+      "projectNameAndRootFormat": "as-provided",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "standalone": true,
+      "style": "scss"
+    },
+    "@nx/angular:component": {
+      "style": "scss",
+      "changeDetection": "OnPush",
+      "standalone": true
+    },
+    "@nx/angular:pipe": {
+      "standalone": true
+    },
+    "@schematics/angular:component": {
+      "style": "scss",
+      "changeDetection": "OnPush",
+      "standalone": true
+    }
   }
 }
