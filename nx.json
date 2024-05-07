@@ -51,11 +51,11 @@
       "linter": "eslint"
     },
     "@nx/angular:application": {
-      "bundler": "esbuild",
       "e2eTestRunner": "none",
       "linter": "eslint",
       "style": "scss",
       "unitTestRunner": "jest",
+      "bundler": "esbuild",
       "projectNameAndRootFormat": "as-provided",
       "routing": true,
       "ssr": true,
