@@ -51,13 +51,15 @@
       "linter": "eslint"
     },
     "@nx/angular:application": {
-      "projectNameAndRootFormat": "as-provided",
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
+      "bundler": "esbuild",
       "e2eTestRunner": "none",
-      "standalone": true,
-      "changeDetection": "OnPush"
+      "linter": "eslint",
+      "style": "scss",
+      "unitTestRunner": "jest",
+      "projectNameAndRootFormat": "as-provided",
+      "routing": true,
+      "ssr": true,
+      "standalone": true
     },
     "@nx/angular:library": {
       "projectNameAndRootFormat": "as-provided",
@@ -78,6 +80,13 @@
       "style": "scss",
       "changeDetection": "OnPush",
       "standalone": true
+    }
+  },
+  "targetDefaults": {
+    "@angular-devkit/build-angular:application": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   }
 }
