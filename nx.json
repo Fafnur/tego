@@ -64,19 +64,19 @@
     },
     "@nx/angular:library": {
       "linter": "eslint",
+      "unitTestRunner": "jest",
       "prefix": "tego",
       "projectNameAndRootFormat": "as-provided",
       "skipTests": true,
       "standalone": true,
-      "style": "scss",
-      "unitTestRunner": "jest"
+      "style": "scss"
     },
     "@nx/angular:component": {
+      "style": "scss",
       "changeDetection": "OnPush",
       "prefix": "tego",
       "skipTests": true,
-      "standalone": true,
-      "style": "scss"
+      "standalone": true
     },
     "@nx/angular:pipe": {
       "standalone": true
