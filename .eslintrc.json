@@ -51,22 +51,10 @@
             "trailingUnderscore": "allow"
           },
           {
-            "selector": "import",
-            "format": ["camelCase", "PascalCase"]
-          },
-          {
             "selector": "variable",
             "format": ["camelCase", "UPPER_CASE"],
             "leadingUnderscore": "allow",
             "trailingUnderscore": "allow"
-          },
-          {
-            "selector": "variable",
-            "format": ["camelCase", "UPPER_CASE", "PascalCase"],
-            "leadingUnderscore": "allow",
-            "trailingUnderscore": "allow",
-            "modifiers": ["const"],
-            "types": ["function"]
           },
           {
             "selector": "typeLike",
@@ -77,8 +65,12 @@
             "format": ["PascalCase"]
           },
           {
-            "selector": "objectLiteralProperty",
-            "format": null
+            "selector": "property",
+            "format": null,
+            "filter": {
+              "regex": "^(host)$",
+              "match": false
+            }
           }
         ],
         "complexity": "error",
@@ -95,9 +87,11 @@
         "simple-import-sort/imports": [
           "error",
           {
-            "groups": [["^\\u0000"], ["^@?(?!tego)\\w"], ["^@tego?\\w"], ["^\\w"], ["^"], ["^\\."]]
+            "groups": [["^\\u0000"], ["^@?(?!tego)\\w"], ["^@tego?\\w"], ["^\\w"], ["^[^.]"], ["^\\."]]
           }
         ],
+        "sort-imports": "off",
+        "import/named": "off",
         "import/first": "error",
         "import/newline-after-import": "error",
         "import/no-duplicates": "error",
@@ -106,6 +100,7 @@
         "@typescript-eslint/no-shadow": "error",
         "no-invalid-this": "off",
         "@typescript-eslint/no-invalid-this": ["warn"],
+        "@angular-eslint/no-host-metadata-property": "off",
         "@typescript-eslint/no-extra-semi": "error",
         "no-extra-semi": "off"
       }
